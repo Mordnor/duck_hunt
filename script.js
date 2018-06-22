@@ -1,6 +1,16 @@
 $(document).ready(function() {
 
-    $("#content").append("<div>");
+    var up = 100;
+    var ducksTab = [];
+    var duckNumb = prompt('How much ducks?');
+
+    for (var i = 0; i < duckNumb; i++) {
+      $("#content").append("<div>");
+      ducksTab.push(Math.floor(Math.random() * 100) + "%");
+    }
+
+    console.log(ducksTab);
+
     $("div").attr("class", "duck");
     $(".duck").css({
         "background-color": "red",
@@ -9,14 +19,20 @@ $(document).ready(function() {
         "position": "absolute",
         "transition": "1s",
     });
+    $(".duck").css("top", up + "%");
 
-    setInterval(move, 1200);
+    setInterval(move, 1000);
     $(".duck").each(function move() {})
 
-    function move() {
-        $(".duck").css("top", Math.floor(Math.random() * 90) + "%");
-        $(".duck").css("left", Math.floor(Math.random() * 90) + "%");
+    $(".duck").each(function(i){
+      $(this).css("top", ducksTab[i]) // à mettre en left
+    })
 
+    function move() {
+      console.log($(".duck"));
+        up -= 8;
+        $(this).css("top", up + "%");
+        $(this).css("left", Math.floor(Math.random() * 100) + "%");
     };
 
     $(".duck").click(shoot);
